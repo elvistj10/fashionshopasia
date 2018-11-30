@@ -1,0 +1,16 @@
+<div ng-controller="LoginCtrl" ng-init="getAccount()">
+	<div class="container">
+		<div align="center">
+			<h3><strong><u>Profil</u></strong></h3>	
+	    <table>
+	     		<tr><td><b>Nama Lengkap</b><input type="text" class="form-control" ng-model="nama"></td></tr>
+	    		<tr><td><b>Username</b><input type="text" class="form-control" ng-model="username"></td></tr>
+	    		<tr><td><b>Password Baru</b><input type="password" class="form-control" ng-model="pwdbaru"></td></tr>
+	    		<tr><td><b>Ulangi Password Baru</b><input type="password" class="form-control" ng-model="ulgpwdbaru"></td></tr>
+	    		<tr><td style="color: red;">{{errorPass}}</td></tr>
+	    		<tr><td style="color: green;">{{suksesPass}}</td></tr>
+	    </table><br>
+	    <button class="btn btn-warning" ng-click="updateAkun()" id="tmbUpdateAkun">Update</button>
+		</div><br>
+	</div>
+</div>

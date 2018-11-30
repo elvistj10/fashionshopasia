@@ -1,0 +1,45 @@
+div.gallery {
+    border: 1px solid #ccc;
+}
+
+div.gallery:hover {
+    border: 1px solid #777;
+}
+
+div.gallery img {
+    width: 150px;
+    height: 100px;
+}
+
+div.desc {
+    padding: 15px;
+    text-align: center;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.imgBox{
+    max-width: 170px;
+    max-height: 170px;
+    float: left;
+}
+
+.responsive {
+    padding: 0 6px;
+    float: left;
+    width: 18.99999%;
+}
+
+@media only screen and (max-width: 300px) {
+    .responsive {
+        width: 100%;
+    }
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}

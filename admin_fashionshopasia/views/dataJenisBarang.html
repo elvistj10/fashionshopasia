@@ -1,0 +1,77 @@
+<div ng-controller="JenisBarangCtrl" ng-init="lihatjenisbarang()" class="container">
+	
+	<div class="modal-body" id="kolomTambahJenis">
+        <div class="form-group">
+            <label>Nama Jenis Barang</label>
+            <input placeholder="isi disini..." type="text" ng-model="datajenisbarang.namajenisbarang" class="form-control" required />
+            <p style="color: red;">{{error}}</p>
+        </div>
+        <button class="btn btn-warning" ng-click="tambahjenisbarang()">Simpan</button>
+        <button class="btn btn-info" ng-click="tutupModalJenis()">Tutup</button>
+    </div>
+
+	<div class="modal-body" id="kolomEditJenis">
+        <div class="form-group">
+            <label>Nama Jenis Barang</label>
+            <input type="text" ng-model="datajenisbarang.namajenisbarang" class="form-control" required />
+            <p style="color: red;">{{error}}</p>
+        </div>
+        <button class="btn btn-warning" ng-click="updatejenisbarang()">Update</button>
+        <button class="btn btn-info" ng-click="tutupModalJenis()">Tutup</button>
+    </div>
+
+    <table class="pull-right">
+    	<tr>
+			<div class="col-xs-4">
+	          <td><input ng-model="cari" id="search" class="form-control" placeholder="Pencarian..."></td>
+	        </div>     
+	        
+	        <div class="col-xs-4">
+	        	<td><button type="button" class="btn btn-primary" ng-click="inputTambahJenis()">Tambah</button></td>
+	        </div>	        
+	    </tr>
+	</table>
+    
+<table class="table table-striped">
+	<tr>
+		<th scope="col" hidden>No</th>
+		<th scope="col">Nama Jenis Barang</th>
+		<th scope="col">Edit</th>
+		<th scope="col">Hapus</th>
+	</tr>
+	<tr dir-paginate="x in datajenisbarang | filter:cari | itemsPerPage:7">
+		<!-- <td>{{$index +1}}</td>	 -->
+		<td hidden>{{x.idjenisbarang}}</td>
+		<td>{{x.namajenisbarang}}</td>
+		<td><button type="button" class="btn btn-success" ng-click="editjenisbarang(x.idjenisbarang, x.namajenisbarang)">Edit</button></td>
+		<td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalHapusJenis" ng-click="getId(x.idjenisbarang, x.namajenisbarang)">Hapus</button></td>
+	<!-- Modal -->
+	<div class="modal fade" id="modalHapusJenis" tabindex="-1" role="dialog" aria-labelledby="modalHapusJenis" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="modalHapusJenis">Hapus Jenis Barang</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body"> <b hidden> {{dataGetId}}</b>
+	       	Hapus data dengan Nama: <b> {{dataGetNama}}</b> ?
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-primary" data-dismiss="modal">Tidak</button>
+	        <button type="button" class="btn btn-danger" ng-click="hapusjenisbarang(x.idjenisbarang)" data-dismiss="modal">Ya</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	</tr>
+	
+	<tr>
+		<td colspan="3" align="center">
+			<dir-pagination-controls max-size="7" direction-links="true" boundary-links="true"></dir-pagination-controls>
+		</td>
+	</tr>
+
+</table>
+</div>

@@ -1,0 +1,17 @@
+<div ng-controller="LoginCtrl" ng-init="lihatsosial()" class="container">
+	<div ng-repeat="sos in sosial">
+		<table class="form-group"  align="center">
+				<tr scope="col" hidden><td>{{sos.idSosial}}</td></tr>
+				<tr scope="col"><td><b>Nomor HP : </b><input type="tel" id="no" ng-model="sos.nohp" class="form-control" /></td></tr>
+				<tr scope="col"><td><b>Facebook : </b><input type="text" id="fb" ng-model="sos.facebook" class="form-control"/></td></tr>
+				<tr scope="col"><td><b>Whatsapp : </b><input type="tel" id="wa" ng-model="sos.whatsapp" class="form-control"/></td></tr>	
+				<tr scope="col"><td><b>Instagram : </b><input type="text" id="ig" ng-model="sos.instagram" class="form-control"/></td></tr>
+				<tr scope="col"><td><b>Email : </b><input type="email" id="mail" ng-model="sos.email" class="form-control"/></td></tr>
+				<tr scope="col"><td><b>Lokasi Toko : </b>
+					<textarea id="lok" type="text" ng-model="sos.lokasi" class="form-control"></textarea>
+				</td></tr>
+				
+				<tr scope="col"><td><button class="btn btn-warning form-control" ng-click="updatesosial(sos.idSosial, sos.nohp, sos.facebook, sos.whatsapp, sos.instagram, sos.email, sos.lokasi)">Update</button></td></tr>
+		</table>
+	</div>
+</div>

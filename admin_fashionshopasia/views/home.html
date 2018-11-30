@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html ng-app="rootModule">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>Fashionshopasia | Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../lib/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <script src="../lib/angular/angular.js"></script>    
+    <script src="../lib/angular/angular-route.min.js"></script>
+    <script src="../lib/angular/angular-route.js"></script>
+    <script src="../lib/dirPagination.js"></script>
+    <script src="../script/controllers.js"></script>
+    <script src="../lib/jquery/jquery.js"></script>
+    <script src="../lib/jquery/jquery.min.js"></script>
+    <script src="../lib/bootstrap/bootstrap.min.js"></script>
+    <script src="../lib/bootstrap/ui-bootstrap-tpls-0.9.0.js"></script>
+    <script>$(".nav li").on("click", function() {$(".nav li").removeClass("active");$(this).addClass("active");});</script>    
+
+  </head>
+  <body>   
+
+    <div class="container" style="padding-top: 0.3%;">
+      
+      <div class="w3-container w3-teal" style=""><h3 align="center" style="font: bold 30px Georgia, serif; height: 60px;">
+        Halaman Admin Fashionshopasia</h3>
+      </div>
+      
+      <div ng-controller="LoginCtrl">
+        <label><a href="#" ng-click="$event.preventDefault();logout()" style="color: blue;font-size: 13px;">Logout   ({{namaAdmin}})</a></label>
+        <label class="pull-right"><a href="#Account" style="color: blue;font-size: 13px;">Edit Akun</a></label>
+      </div><div style="width: 100%; border-bottom: 2px solid grey;"></div>
+      
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#Home"><b>FASHIONSHOPASIA</b></a></li>
+        <li><a href="#Barang"><b>Data Barang</b></a></li>
+        <li><a href="#Kategori"><b>Data Kategori</b></a></li>
+        <li><a href="#Jenis"><b>Data Jenis Barang</b></a></li>
+        <li><a href="#Detail"><b>Data Detail Barang</b></a></li>
+        <li><a href="#Sosial"><b>Data Akun Sosial</b></a></li>
+        <li><a href="#Info"><b>Data Informasi</b></a></li>
+      </ul>
+
+   <div ng-view></div>
+
+    <div class="w3-container w3-teal" style="outline-style: inherit; padding-bottom: 0.3%;" >
+        <div align="center">
+        <span class="copyright">
+          Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Fashionshopasia.com</a>
+        </span>
+      </div>
+    </div>
+    </div>
+  </body>
+</html>

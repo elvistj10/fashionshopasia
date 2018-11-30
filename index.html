@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="clientModule" ng-controller="ProductCtrl">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<title>Fashionshopasia | Home</title>
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+		<!-- Bootstrap -->
+		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+		<!-- Slick -->
+		<link type="text/css" rel="stylesheet" href="css/slick.css"/>
+		<link type="text/css" rel="stylesheet" href="css/slick-theme.css"/>
+		<!-- nouislider -->
+		<link type="text/css" rel="stylesheet" href="css/nouislider.min.css"/>
+		<!-- Font Awesome Icon -->
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+		<!-- MY STYLE CSS -->
+		<link rel="stylesheet" href="css/mycss.css">
+		<!-- Custom stlylesheet -->
+		<link type="text/css" rel="stylesheet" href="css/style.css"/>
+		<link rel="icon" href="./img/home.jpg">
+    </head>
+	<body>
+		<!-- TOP HEADER -->
+			<div id="top-header">
+				<div class="container">
+					<ul class="pull-left">
+					<li><a href="#"><img src="./img/logoku.png" ></a></li>
+					</ul>
+					<ul class="header-links pull-right" ng-repeat="x in sosial">
+						<li><a href="#"><i class="fa fa-phone"></i>{{x.nohp}}</a></li>
+						<li><a href="#"><i class="fa fa-facebook"></i>{{x.facebook}}</a></li>
+						<li><a href="#"><i class="fa fa-whatsapp"></i>{{x.whatsapp}}</a></li>
+						<li><a href="#"><i class="fa fa-instagram"></i>{{x.instagram}}</a></li>
+						<li><a href="#"><i class="fa fa-envelope-o"></i>{{x.email}}</a></li>
+						<li><a href="#"><i class="fa fa-map-marker"></i>{{x.lokasi}}</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- /TOP HEADER -->
+		<!-- HEADER -->
+		<header>
+			<!-- MAIN HEADER -->
+			<div id="header">
+				<!-- container -->
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+
+						<!-- SEARCH BAR -->
+						<div class="col-md-12">
+							<div class="header-search">
+								<form>
+									<button class="input-select" disabled><b>Pencarian :</b></button>
+									<input class="input" placeholder="disini . . ." ng-model="cari">
+									<button class="search-btn">Cari</button>
+								</form>
+							</div>
+						</div>
+						<!-- /SEARCH BAR -->					
+					<!-- row -->
+					</div>
+				<!-- container -->
+				</div>
+			<!-- /MAIN HEADER -->
+			</div>
+		</header>
+		<!-- /HEADER -->
+
+		<!-- NAVIGATION -->
+		<nav id="navigation" align="center"><br>
+				<b><h4>PRUDUK TERSEDIA</h4></b>
+		</nav>
+		<nav id="navigation">
+			<!-- container -->
+			<div class="container">
+				<div class="col-md-4"><b>
+					<select id="selectOrder" class="input-select">
+						<option value="0">Urutkan</option>
+			            <option value="1">Harga Terendah</option>
+			            <option value="2">Harga Tertinggi</option>
+			            <option value="3">Paling Banyak Dilihat</option>
+			        </select>
+				</div>
+				<div class="col-md-4"><b>
+					<select id="selectKategori" class="input-select">
+						<option value="0">Semua Kategori</option>
+						<option ng-repeat="x in datakategori" value="{{x.idkategori}}">
+							{{x.namakategori}}
+						</option>
+					</select>
+				</div>
+				<div class="col-md-4">	
+					<select id="selectJenis" class="input-select">
+						<option value="0">Semua Jenis</option>
+						<option ng-repeat="x in datajenis" value="{{x.idjenisbarang}}">
+							{{x.namajenisbarang}}
+						</option>
+					</select>
+				</div>
+			</div>
+			<!-- /container -->
+		</nav>
+		<!-- /NAVIGATION -->
+
+		<!-- MODAL DETAIL BARANG -->
+			<div class="modal fade" id="modalDetailBarang" tabindex="-1" role="dialog" aria-labelledby="modalDetailBarang" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h4 class="modal-title" align="center" id="modalDetailBarang"><b>Detail Barang
+			        <button type="button" class="btn btn-danger pull-right" data-dismiss="modal">X</button></b></h4>			        
+			      </div>
+			      
+			      <div class="modal-body thumbnail">
+			       		<table align="center">
+			       			<tr>
+							  <th rowspan="5">
+							  	<img class="card-img-top thumbnail" style="max-width: 300px;" src="admin_fashionshopasia/web-service/upload/{{foto}}"/>
+							  </th>
+							</tr>
+							
+			       		</table>
+			       		<table class="thumbnail" align="center">
+			       			<tr>
+							  <td><b><h5>Kode Barang : <span style="color:#ad2020;">{{kodeBrg}}</span></h5></b></td>
+							</tr>
+
+							<tr>
+							  <td><h5> {{namajen}} ( {{namadet}} ) {{namakat}}</h5></td>
+							</tr>
+
+							<tr>
+							  <td><h5> Harga : <span style="color:#ad2020;">IDR. {{hrgbrg}}</span></h5></td>
+							</tr>
+
+							<tr>
+							  <td><h5><u><b>Deskripsi : </b></u></h5><p style="color: #ad2020;"><b>{{deskripsi}}</b></p></td>
+							</tr>
+			       		</table>
+			      </div>
+
+			    </div>
+			  </div>
+			</div>
+
+		<!-- SECTION -->	
+		<div class="container">
+		<div class="card-group" dir-paginate="x in product | filter:cari | orderBy:x.hargabarang | itemsPerPage:12">
+			<div class="col-md-3">
+				<div class="product" ng-click="getDataBarang(x.idbarang, x.kode, x.namakategori, x.namajenisbarang, x.namadetailbarang, x.hargabarang, x.gambar, x.deskripsi)">
+					<a href="#modalDetailBarang" data-toggle="modal" data-target="#modalDetailBarang">
+					<p class="product-category" align="center"><b>[ {{x.namakategori}} ]</b></p>
+					<div class="thumbnail">
+						<div class="product-body">
+							<div class="card">
+				    		<img class="card-img-top" width="170" height="170" src="admin_fashionshopasia/web-service/upload/{{x.gambar}}"/>
+				    		<hr>
+		            		<h3 class="product-name">{{x.namajenisbarang}} ( {{x.namadetailbarang}} )</h3>
+							<h4 class="product-price">IDR. {{x.hargabarang}}</h4>
+							<i class="fa fa-eye"> dilihat : {{x.dilihat}} x</i>
+				  			</div>
+						</div>
+					</div>
+					</a>
+				</div>
+			</div>
+		</div>
+		</div>
+		<div class="clearfix"></div>
+		<div align="center">
+			<dir-pagination-controls max-size="12" direction-links="true" boundary-links="true"></dir-pagination-controls>
+		</div>
+		<!-- /SECTION -->
+
+		<!-- FOOTER -->
+		<footer id="footer">
+			<!-- top footer -->
+			<div class="section">
+				<!-- container -->
+				<div class="container" align="center">
+					<!-- row -->
+					<div class="row">
+						<div class="col-md-3 col-xs-6" ng-repeat="x in datainfo">
+							<div class="footer">
+								<h3 class="footer-title">{{x.judul}}</h3>
+								<p>{{x.isi}}</p>
+								<ul class="footer-links">
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /row -->
+				</div>
+				<!-- /container -->
+			</div>
+			<!-- /top footer -->
+
+			<!-- bottom footer -->
+			<div id="bottom-footer" class="section">
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<ul class="footer-payments">
+								<li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
+								<li><a href="#"><i class="fa fa-credit-card"></i></a></li>
+								<li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
+								<li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
+								<li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
+								<li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
+							</ul>
+							<span class="copyright">
+								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Fashionshopasia.com</a>
+							</span>
+						</div>
+					</div>
+						<!-- /row -->
+				</div>
+				<!-- /container -->
+			</div>
+			<!-- /bottom footer -->
+		</footer>
+		<!-- /FOOTER -->
+
+		<!-- INJECT JS SCRIPT -->				
+		<!--<script src="js/bootstrap.min.js"></script>
+		<script src="js/slick.min.js"></script>
+		<script src="js/nouislider.min.js"></script>
+		<script src="js/jquery.zoom.min.js"></script>
+		<script src="js/main.js"></script> -->
+		<script src="js/jquery.min.js"></script>
+		<script src="admin_fashionshopasia/lib/angular/angular.js"></script>    
+	    <script src="admin_fashionshopasia/lib/dirPagination.js"></script>
+	    <script src="admin_fashionshopasia/lib/bootstrap/bootstrap.min.js"></script>
+	    <script src="admin_fashionshopasia/lib/bootstrap/ui-bootstrap-tpls-0.9.0.js"></script>
+		<script src="js/controllers.js"></script>
+
+	</body>
+</html>

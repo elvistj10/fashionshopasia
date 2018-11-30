@@ -1,0 +1,78 @@
+<div ng-controller="KategoriCtrl" ng-init="lihatkategori()" class="container">
+	
+	<div class="modal-body" id="kolomTambahKategori">
+        <div class="form-group">
+            <label>Nama Kategori</label>
+            <input placeholder="isi disini..." type="text" ng-model="datakategori.namakategori" class="form-control" required />
+            <p style="color: red;">{{error}}</p>
+        </div>
+        <button class="btn btn-warning" ng-click="tambahkategori()">Simpan</button>
+        <button class="btn btn-info" ng-click="tutupModalKategori()">Tutup</button>
+    </div>
+
+	<div class="modal-body" id="kolomEditKategori">
+        <div class="form-group">
+            <label>Nama Kategori</label>
+            <input type="text" ng-model="datakategori.namakategori" class="form-control" required />
+            <p style="color: red;">{{error}}</p>
+        </div>
+        <button class="btn btn-warning" ng-click="updatekategori()">Update</button>
+        <button class="btn btn-info" ng-click="tutupModalKategori()">Tutup</button>
+    </div>
+
+     <table class="pull-right">
+    	<tr>
+			<div class="col-xs-4">
+	          <td><input ng-model="cari" id="search" class="form-control" placeholder="Pencarian..."></td>
+	        </div>       
+	        
+	        <div class="col-xs-4">
+	        	<td><button type="button" class="btn btn-primary" ng-click="inputTambahKategori()">Tambah</button></td>
+	        </div>	        
+	    </tr>
+	</table>
+
+	<table class="table table-striped">
+		<tr>
+			<th scope="col" hidden>No</th>
+			<th scope="col">Nama Kategori</th>
+			<th scope="col">Edit</th>
+			<th scope="col">Hapus</th>
+		</tr>	
+		<tr dir-paginate="x in datakategori | filter:cari | itemsPerPage:7">	
+			<!-- <td>{{$index +1}}</td>	 -->
+			<td hidden>{{x.idkategori}}</td>
+			<td>{{x.namakategori}}</td>	
+			<td><button type="button" class="btn btn-success" ng-click="editkategori(x.idkategori, x.namakategori)">Edit</button></td>
+			<td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalHapusKategori" ng-click="getId(x.idkategori, x.namakategori)">Hapus</button></td>
+			
+			<!-- Modal Hapus Kategori -->
+			<div class="modal fade" id="modalHapusKategori" tabindex="-1" role="dialog" aria-labelledby="modalHapusKategori" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="modalHapusKategori">Hapus Kategori</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body"> <b hidden> {{dataGetId}}</b>
+			       	Hapus data dengan Nama: <b> {{dataGetNama}}</b> ?
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-primary" data-dismiss="modal">Tidak</button>
+			        <button type="button" class="btn btn-danger" ng-click="hapuskategori(x.idkategori)" data-dismiss="modal">Ya</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</tr>
+
+		<tr>
+			<td colspan="4" align="center">
+				<dir-pagination-controls max-size="7" direction-links="true" boundary-links="true"></dir-pagination-controls>
+			</td>
+		</tr>
+		
+	</table>
+</div>

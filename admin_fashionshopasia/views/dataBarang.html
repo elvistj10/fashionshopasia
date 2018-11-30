@@ -1,0 +1,172 @@
+<div ng-controller="BarangCtrl" ng-init="lihatbarang();" class="container">
+
+	<!-- MODAL EDIT BARANG -->
+			 <div class="modal fade" id="modalEditBarang" tabindex="-1" role="dialog" aria-labelledby="modalEditBarang" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" align="center" id="modalEditBarang"><b>Edit Data Barang</b></h5>
+			      </div>
+			      
+			      <div class="modal-body">
+			      	 <form id="formText">
+					 	<input id="idbarang" type="text" ng-model="databarang.idbarang" disabled hidden/>
+					 	
+					 	Pilih Kategori:
+					 	<select id="selectKategori" ng-model="datakategori.idkategori" class="form-control">
+					      <option ng-repeat="isi in datakategori" value="{{isi.idkategori}}">{{isi.namakategori}}</option>
+					    </select>
+					    
+					    Pilih Jenis Barang:
+					 	<select id="selectJenis" ng-model="datajenisbarang.idjenisbarang" class="form-control">
+					      <option ng-repeat="data in datajenisbarang" value="{{data.idjenisbarang}}">{{data.namajenisbarang}}</option>
+					    </select>
+					    
+					    Pilih Detail Jenis Barang:
+					 	<select id="selectDetail" ng-model="datadetailbarang.iddetailbarang" class="form-control">
+					      <option ng-repeat="data in datadetailbarang" value="{{data.iddetailbarang}}">{{data.namadetailbarang}}</option>
+					    </select>
+					    
+					    Harga Barang:
+					    <input placeholder="Harga Barang" id="hargabrg" type="number" ng-model="databarang.hargabarang" class="form-control"/>
+					    <input placeholder="Nama Foto" type="text" name="gambar" ng-model="gambar" disabled hidden>
+
+					    Deskripsi Barang:
+					    <textarea style="margin: 0px; max-width: 100%;" placeholder="Deskripsi Barang" type="text" ng-model="databarang.deskripsi" class="form-control"></textarea> 					    
+					 </form>
+					 <form id="formGambar" ng-submit="submit()" name="form" role="form" align="center">			
+						<br />						
+					     <div align="center" id="imgCanvas"><img id="gambarBrg" src="../images/noImages.png" ng-src="{{image_source}}" style=";max-width: 100%;">
+					    </div>
+					    <input type="file" accept="image/*" onchange="angular.element(this).scope().uploadedFile(this)">
+					 </form>
+			      </div>
+
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="clearfield()">Batal</button>
+			        <button type="button" class="btn btn-danger" ng-click="updatebarang()" data-dismiss="modal">Update</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+
+	<table class="pull-right">
+		<tr>
+			<div class="col-xs-4">
+	          <td><input ng-model="cari" id="search" class="form-control" placeholder="Pencarian..."></td>
+	        </div>
+
+	        <div class="col-xs-4"><td>
+	        	<button type="button" class="btn btn-primary" ng-click="clearfield()" data-toggle="modal" data-target="#modalTambahBarang">Tambah</button>
+	        </td></div>
+	    </tr>
+	</table>
+
+	<table class="table table-striped">		
+			<tr>
+			<th scope="col" hidden>No</th>
+			<th scope="col">Kode</th>
+			<th scope="col">Kategori</th>
+			<th scope="col">Nama Barang</th>
+			<th scope="col">Jenis Barang</th>
+			<th scope="col">Harga Barang</th>
+			<th scope="col">Gambar</th>
+			<th scope="col">Deskripsi</th>
+			<th scope="col">Edit</th>
+			<th scope="col">Hapus</th>
+			</tr>
+		<tr dir-paginate="x in databarang | filter:cari | itemsPerPage:7">
+			<!-- <td>{{$index +1}}</td>	 -->
+			<td hidden>{{x.idbarang}}</td>
+			<td>{{x.kode}}</td>
+			<td>{{x.namakategori}}</td>
+			<td>{{x.namajenisbarang}}</td>
+			<td>{{x.namadetailbarang}}</td>
+			<td>IDR. {{x.hargabarang}}</td>
+			<td><img src="../web-service/upload/{{x.gambar}}" style="height: 80px;width:80px;"></td>
+			<td>{{x.deskripsi | limitTo: 8}} ...</td>
+			<td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalEditBarang" ng-click="editbarang(x.idbarang, x.idkategori, x.idjenisbarang, x.iddetailbarang, x.namakategori, x.namajenisbarang, x.namadetailbarang, x.hargabarang, x.gambar, x.deskripsi)">
+			Edit</button></td>
+			<td><button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#modalHapusBarang" ng-click="getId(x.idbarang)">Hapus</button></td>
+
+			<!-- MODAL TAMBAH BARANG -->
+			<div class="modal fade" id="modalTambahBarang" tabindex="-1" role="dialog" aria-labelledby="modalTambahBarang" aria-hidden="true">
+			  <div class="modal-dialog" role="document" ng-init="clearfield()">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" align="center" id="modalTambahBarang"><b>Tambah Data Barang</b></h5>
+			      </div>
+			      
+			      <div class="modal-body">
+			      	 <form id="formText">
+					 	<input id="idbarang" type="text" ng-model="databarang.idbarang" disabled hidden/>
+					 	
+					 	Pilih Kategori:
+					 	<select id="selectKategori" ng-model="datakategori.idkategori" class="form-control">
+					      <option ng-repeat="isi in datakategori" value="{{isi.idkategori}}">{{isi.namakategori}}</option>
+					    </select>
+					    
+					    Pilih Jenis Barang:
+					 	<select id="selectJenis" ng-model="datajenisbarang.idjenisbarang" class="form-control">
+					      <option ng-repeat="data in datajenisbarang" value="{{data.idjenisbarang}}">{{data.namajenisbarang}}</option>
+					    </select>
+					    
+					    Pilih Detail Jenis Barang:
+					 	<select id="selectDetail" ng-model="datadetailbarang.iddetailbarang" class="form-control">
+					      <option ng-repeat="data in datadetailbarang" value="{{data.iddetailbarang}}">{{data.namadetailbarang}}</option>
+					    </select>
+					    
+					    Harga Barang:
+					    <input placeholder="Harga Barang" id="hargabrg" type="number" ng-model="databarang.hargabarang" class="form-control"/>
+					    <input placeholder="Nama Foto" type="text" name="gambar" ng-model="gambar" disabled hidden>
+
+					    Deskripsi Barang:
+					    <textarea style="margin: 0px; max-width: 100%;" placeholder="Deskripsi Barang" type="text" ng-model="databarang.deskripsi" class="form-control"></textarea> 					    
+					 </form>
+					 <form id="formGambar" ng-submit="submit()" name="form" role="form" align="center">			
+						<br />
+						<p style="color: green">Note : Gambar yang disarankan berukuran lebar dan tinggi yang sama</p>
+					    <div align="center" id="imgCanvas"><img id="gambarBrg" src="../images/noImages.png" ng-src="{{image_source}}" style=";max-width: 100%;">
+					    </div>
+					    <input type="file" accept="image/*" onchange="angular.element(this).scope().uploadedFile(this)">
+					 </form>
+			      </div>
+
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-primary" data-dismiss="modal">Batal</button>
+			        <button type="button" class="btn btn-danger" ng-click="tambahbarang()" data-dismiss="modal">Simpan</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+
+			<!-- Modal Hapus Barang -->
+			<div class="modal fade" id="modalHapusBarang" tabindex="-1" role="dialog" aria-labelledby="modalHapusBarang" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="modalHapusBarang">Hapus Data Barang</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body"> <b hidden> {{dataGetId}}</b>
+			       	Yakin akan menghapus data ini ?
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-primary" data-dismiss="modal">Tidak</button>
+			        <button type="button" class="btn btn-danger" ng-click="hapusbarang(dataGetId)" data-dismiss="modal">Ya</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</tr>
+
+		<tr>
+			<td colspan="8" align="center">
+				<dir-pagination-controls max-size="7" direction-links="true" boundary-links="true"></dir-pagination-controls>
+			</td>
+		</tr>
+
+	</table>
+</div>
